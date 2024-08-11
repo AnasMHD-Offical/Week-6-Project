@@ -1,1 +1,15 @@
-<h1>Admin Dashboard</h1>
+<%- include('../layout/header.ejs') %>
+
+<div class="container d-flex justify-content-center align-middle">
+    <div class="card text-center m-5" style="width: 23rem;">
+        <img src="/images/bg-1.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h4 class="card-title">🎉Welcome Administrator 🎉<br> <strong><%= locals.name %></strong></h4>
+          <p class="card-text fs-5 fw-normal">You were successfully login to the <br>🔐 <strong>Admin dashboard</strong> 🔐</p>
+          <a href="/admin/logout" class="btn btn-primary text-center btn-md">Logout</a>
+          <a href="/admin/adminpanel" class="btn btn-primary text-center">Admin panel</a>
+        </div>
+    </div>
+</div>
+
+  <%- include('../layout/footer.ejs') %>
