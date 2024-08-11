@@ -1,0 +1,15 @@
+
+<%- include('../layout/header.ejs') %>
+
+<div class="container d-flex justify-content-center align-middle">
+    <div class="card text-center m-5" style="width: 23rem;">
+        <img src="images/bg-1.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h4 class="card-title">🎉Welcome 🎉<br> <strong><%= locals.name %></strong></h4>
+          <p class="card-text fs-5 fw-normal">✅You were successfully login to the dashboard 🧑🏻‍💻</p>
+          <a href="/logout" class="btn btn-primary text-center">logout</a>
+        </div>
+    </div>
+</div>
+
+  <%- include('../layout/footer.ejs') %>
