@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const userRoutes = require('./routes/userRoutes')
 const AdminRoutes = require('./routes/adminRoute')
+const nocache = require('nocache')
 const ejs = require('ejs')
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -14,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+app.use(nocache())
 //Defining session
 app.use(session({
     secret: "secret",
@@ -35,6 +37,9 @@ app.use('/', userRoutes)
 //Admin Route setting
 app.use('/admin', AdminRoutes)
 
+app.get('*',(req,res)=>{
+    res.status(404).render('404')
+})
 
 //Listening the server
 app.listen(PORT, () => console.log(`Server Running on http://localhost:${PORT}`))

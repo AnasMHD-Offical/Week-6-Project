@@ -1,6 +1,8 @@
 const User = require("../models/UserSchema")
 const express = require('express')
 const bcrypt = require('bcrypt')
+
+//password hashing
 const securePassword = async(password) => {
     try {
         const passwordHased = await bcrypt.hash(password, 10)
@@ -10,8 +12,8 @@ const securePassword = async(password) => {
         
     }
 }
-//Register Route
 
+//Register Route
 const loadRegister = async (req,res)=>{
     try { 
        res.render('registration',{message:"Welcome to the User Registration!",resolve:true})
@@ -21,7 +23,6 @@ const loadRegister = async (req,res)=>{
 }
 
 //Adding a new user
-
 const insertUser = async (req,res)=>{
     try {
         const sPassword = await securePassword(req.body.password)
@@ -33,7 +34,6 @@ const insertUser = async (req,res)=>{
             is_admin:0
          })
         const userData = await user.save()
-        console.log(userData);  
         if(userData){
             res.render('registration',{message:"Your registration has been successfully",resolve : true})
         }else{
@@ -54,9 +54,13 @@ const loginLoad = async (req,res)=>{
         
     }
 }
+
 // Login verification
 const verifyLogin = async (req,res) =>{
     try {
+        if(req.session.userId) {
+            return res.redirect('/dashboard')
+        }
         const email = req.body.email
         const password = req.body.password
         const userData = await User.findOne({email:email})
@@ -92,8 +96,8 @@ const renderDashboard = async (req,res)=>{
         
     }
 }
-//User Logout
 
+//User Logout
 const userLogout = async (req,res)=>{
     try {
         req.session.destroy()
@@ -104,6 +108,8 @@ const userLogout = async (req,res)=>{
     }
 }
 
+
+
 //Exporting the conntrollers
 
 module.exports = {
@@ -112,5 +118,5 @@ module.exports = {
     loginLoad,
     verifyLogin,
     renderDashboard,
-    userLogout
+    userLogout,
 } 
