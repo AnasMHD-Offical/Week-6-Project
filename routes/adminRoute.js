@@ -14,8 +14,8 @@ control.use(express.json())
 control.use(express.urlencoded({ extended: true }))
 
 //admin login route
-adminRouter.get('/', auth.isLogout, adminController.loadLogin)
-adminRouter.post('/', adminController.verifyAdminLogin)
+adminRouter.get('/',auth.isLogout, adminController.loadLogin)
+adminRouter.post('/',adminController.verifyAdminLogin)
 
 // admin dashboard route
 adminRouter.get('/dashboard', auth.isLogin, adminController.loadAdminDashboard)
